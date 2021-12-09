@@ -1,74 +1,76 @@
 #include <cmath>
 #include <iostream>
+#include <limits>
 
-const short con_4 = 4;
-const short con_2 = 2;
+using namespace std;
 
-int main(int argc, char *argv[]) {
+const uint8_t CONSTANT_FOUR = 4;
+const uint8_t CONSTANT_TWO = 2;
+
+int main( int argc, char *argv[] ) {
      // Input a, b, c
-    std::cout<<"This program will solve equation like ax^2 + bx + c = 0"<<"\n";
-    std::cout<<"Please, enter a, b and c form your equation:"<<"\n";
-    float a;
-    while (1) {
-        std::cout<<"Enter a: ";
-        std::cin>>a;
-        if (a != 0) {
-            break;
-        }
-        std::cout<<"A cannot be 0. Please try again:"<<"\n";
-    }
+    cout<<"This program will solve equation like ax^2 + bx + c = 0"<<endl;
+    cout<<"Please, enter a, b and c form your equation:"<<endl;
 
-    std::cout<<"Enter b: ";
-    float b;
-    std::cin>>b;
+    double coeff_a;
+    double coeff_b;
+    double coeff_c;
 
-    std::cout<<"Enter c: ";
-    float c;
-    std::cin>>c;
-    
-    // Checking for discriminant lover than 0
-    float d;
-    if ((pow(b, con_2) - con_4*a*c) < 0) {
-        std::cout<<"Discriminant is lower than 0. Exiting..."<<"\n";
-        std::cin.get(); 
-        return 1;
+   cout << "Input coefficient <A>: "; 
+    while ( !(cin >> coeff_a) ){ 
+
+        (cout << "Error! Re-Input coefficient <A>: ").flush(); 
+        cin.clear(); 
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); 
+
     } 
-    else {
-        try
-        {
-            d = sqrt(pow(b, con_2) - con_4*a*c);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-            std::cout<<"Ooops. Something failed. Exiting..."<<"\n";
-            std::cin.get(); 
-            return 1;
-        }
+ 
+
+    cout << "Input coefficient <B>: "; 
+    while ( !(cin >> coeff_b) ){ 
+
+        (cout << "Error! Re-Input coefficient <A>: ").flush(); 
+        cin.clear(); 
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' ); 
+
+    } 
+ 
+ 
+    cout << "Input coefficient <C>: "; 
+    while ( !(cin >> coeff_c) ){ 
+
+        (cout << "Error! Re-Input coefficient <A>: ").flush(); 
+        cin.clear(); 
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+    } 
+
+    if( abs(coeff_a) < 0.00){ 
+
+        cout << "x: 0" << endl; 
+
+    } 
+
+    // Checking for discriminant lover than 0
+    auto discriminant = pow(coeff_b, CONSTANT_TWO) - CONSTANT_FOUR*coeff_a*coeff_c;
+
+    if (discriminant < 0) {
+
+        cout<<"Discriminant is lower than 0. Results are complex. Exiting..."<<endl;
+        cin.get(); 
+        return 1;
+
     }
 
     // Finding solution
-    float x1;
-    float x2;
-    try
-        {
-            x1 =(-b + d)/(con_2*a);
-            x2 =(-b - d)/(con_2*a);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-            std::cout<<"Ooops. Something failed. Exiting..."<<"\n";
-            std::cin.get(); 
-            return 1;
-        }
+    auto x1 =(-coeff_b +sqrt( discriminant ))/(CONSTANT_TWO*coeff_a);
+    auto x2 =(-coeff_b -sqrt( discriminant ))/(CONSTANT_TWO*coeff_a);
 
     // Printing solution
+    cout<<"Everything is Okay. Here is your result:"<<endl;
+    cout<<"Xq1: "<<x1<<endl;
+    cout<<"Xq1: "<<x2<<endl;
 
-    std::cout<<"Everything is Okay. Here is your result:"<<"\n";
-    std::cout<<"Xq1: "<<x1<<"\n";
-    std::cout<<"Xq1: "<<x2<<"\n";
-
-    std::cin.get(); 
+    cin.get(); 
     return 0;
 }
