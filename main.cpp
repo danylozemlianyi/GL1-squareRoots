@@ -6,6 +6,8 @@ using namespace std;
 
 const uint8_t CONSTANT_FOUR = 4;
 const uint8_t CONSTANT_TWO = 2;
+const float CONSTANT_ZERO_FLOAT = 0.00;
+const uint8_t CONSTANT_ZERO_INT = 0;
 
 int main( int argc, char *argv[] ) {
      // Input a, b, c
@@ -25,6 +27,14 @@ int main( int argc, char *argv[] ) {
 
     } 
  
+ 
+    if( abs(coeff_a) <= CONSTANT_ZERO_FLOAT){ 
+
+        cout << "x: 0" << endl; 
+        
+        return(1);
+    } 
+
 
     cout << "Input coefficient <B>: "; 
     while ( !(cin >> coeff_b) ){ 
@@ -45,16 +55,10 @@ int main( int argc, char *argv[] ) {
 
     } 
 
-    if( abs(coeff_a) < 0.00){ 
-
-        cout << "x: 0" << endl; 
-
-    } 
-
     // Checking for discriminant lover than 0
     auto discriminant = pow(coeff_b, CONSTANT_TWO) - CONSTANT_FOUR*coeff_a*coeff_c;
 
-    if (discriminant < 0) {
+    if (discriminant < CONSTANT_ZERO_INT) {
 
         cout<<"Discriminant is lower than 0. Results are complex. Exiting..."<<endl;
         cin.get(); 
